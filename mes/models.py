@@ -13,8 +13,8 @@ class Repair(models.Model):
     product_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='品名')
     sn = models.CharField(max_length=255, blank=True, null=True,verbose_name='整机SN')
     board_sn = models.CharField(max_length=255, blank=True, null=True,verbose_name='主板SN')
-    statu = models.IntegerField(blank=True, null=True,verbose_name='维修状态')
-    be_overdue = models.IntegerField(blank=True, null=True,verbose_name='是否过保')
+    statu = models.IntegerField(blank=True, null=True,verbose_name='维修状态',choices=((2,'已接收'),(1,'维修中'),(0,'已修复')),default='已接收')
+    be_overdue = models.IntegerField(blank=True, null=True,verbose_name='是否过保',choices=((1,'已过保'),(0,'未过保')),default='未过保')
     receive_time = models.DateTimeField(blank=True, null=True,verbose_name='接收时间')
     repair_time = models.DateTimeField(blank=True, null=True,verbose_name='修复时间')
 

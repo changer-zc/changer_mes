@@ -23,6 +23,7 @@ class Repair_Admin(admin.ModelAdmin):
     search_fields = ('item_no','sn','board_sn','repair_time',)
     #在列表页可以编辑的字段
     list_editable = ('statu','repair_time')
+
     #列表页上时间搜索
     date_hierarchy = 'repair_time'
     #这个就牛逼了，下面这个函数，会让模型表可以正常添加，但是不能编制，添加后只能查看
