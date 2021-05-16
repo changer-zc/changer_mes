@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import pymysql
+from pathlib import Path
+from django.contrib import admin
+import simpleui
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +28,7 @@ SECRET_KEY = '@6w!t0ea)^0(9!4++3xjb122r4jk9yye9rqjwjtapdf%_2_$kp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,3 +132,64 @@ STATIC_ROOT= os.path.join(BASE_DIR,'/static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+
+admin.AdminSite.site_header="NEXRAY生产管理系统"
+admin.AdminSite.site_title="NEXRAY"
+
+
+
+import time
+import mes
+SIMPLEUI_CONFIG = {
+    'system_keep': False,
+    'menu_display': ['IQC', '维修', '用户管理',],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'dynamic': False,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
+    'menus': [
+
+        # {
+        #     'name': '质检',
+        #     'icon': 'fas fa-code',
+        #     'models': [{
+        #         'name': '质检记录',
+        #         'url': 'http://www.baidu.com',
+        #         'icon': 'far fa-surprise'
+        #     },
+
+
+        {
+            'name': '维修',
+            'icon': 'fas fa-code',
+            'models': [{
+                'name': '维修记录',
+                'url': 'mes/repair/',
+                'icon': 'far fa-surprise'
+            },
+
+            ]
+        },
+                {
+                    'name': '用户管理',
+                    'icon': 'fas fa-code',
+                    'models': [
+
+                        {
+                            'name': '用户',
+                            'url': '/admin/auth/user/',
+                            'icon': 'far fa-surprise'
+                        },
+                    ]
+                },
+
+
+
+
+
+            ]
+        }
+
+
+
+
+
+
