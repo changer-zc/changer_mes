@@ -14,7 +14,7 @@ class Repair_Admin(admin.ModelAdmin):
     #显示的字段
     list_display = ('item_no','product_name','sn','board_sn','statu','be_overdue','receive_time','repair_time')
     #每页展示的条数
-    list_per_page = 20
+    list_per_page = 30
     #点击保存并继续编辑这个按钮给取消掉
     save_as_continue = False
     #详情页面使用radio显示选项
@@ -30,5 +30,6 @@ class Repair_Admin(admin.ModelAdmin):
         if obj:
             return self.readonly_fields+('item_no','product_name','sn','board_sn','statu','be_overdue','receive_time','repair_time')
         return self.readonly_fields
-
+#豆腐干豆腐干大概大概
 admin.site.register(Repair,Repair_Admin)
+#测试一下
