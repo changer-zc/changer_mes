@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加页面</title>
+</head>
+<body>
+<form action="/add1" method="post">
+    {% csrf_token %}
+    <h2>组装扫码</h2>
+    工单号：<input name="record_no">
+    SN:   <input name="sn">
+    主板号：<input name="board_sn">
+    MAC:  <input name="mac1">
+          <input name="mac2">
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

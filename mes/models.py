@@ -21,3 +21,34 @@ class Repair(models.Model):
     class Meta:
         managed = True
         db_table = 'repair'
+
+
+
+class IQC(models.Model):
+    material_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='物料名称')
+    material_sn = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
+    arrive_time = models.DateTimeField(blank=True, null=True,verbose_name='来料时间')
+    appearance = models.IntegerField(blank=True, null=True,verbose_name='外观检测',choices=((1,'合格'),(0,'不合格')),default='不合格')
+    arrive_num = models.CharField(max_length=255, blank=True, null=True,verbose_name='来料数量')
+    bad_num = models.CharField(max_length=255, blank=True, null=True,verbose_name='不良数量')
+    supplier = models.CharField(max_length=255, blank=True, null=True,verbose_name='供应商')
+
+
+    class Meta:
+        managed = True
+        db_table = 'IQC'
+
+
+
+
+
+class test(models.Model):
+    test1 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据1')
+    test2 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据2')
+    test3 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据3')
+    test4 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据4')
+    test5 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据5')
+
+    class Meta:
+        managed = True
+        db_table = 'IQC'

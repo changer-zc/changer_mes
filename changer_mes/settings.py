@@ -168,6 +168,19 @@ SIMPLEUI_CONFIG = {
 
             ]
         },
+
+        {
+            'name': 'IQC',
+            'icon': 'fas fa-code',
+            'models': [{
+                'name': '来料质检',
+                'url': 'mes/iqc/',
+                'icon': 'far fa-surprise'
+            },
+
+            ]
+        },
+
                 {
                     'name': '用户管理',
                     'icon': 'fas fa-code',
