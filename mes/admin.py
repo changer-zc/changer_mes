@@ -60,3 +60,11 @@ class IQC_Admin(admin.ModelAdmin):
         return self.readonly_fields
 
 admin.site.register(IQC,IQC_Admin)
+
+
+
+
+class ware_house_Admin(admin.ModelAdmin):
+    #显示的字段
+    list_display = ('item_no','item_name','numbers','location','supplier','inventory_time',)
+admin.site.register(ware_house,ware_house_Admin)

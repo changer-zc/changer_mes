@@ -300,7 +300,7 @@ SIMPLEUI_CONFIG = {
                 },
                 {
                     'name': '库存',
-                    'url': 'http://127.0.0.1:8000/add1',
+                    'url': 'mes/ware_house',
                     'icon': 'fas fa-warehouse'
                 },
 

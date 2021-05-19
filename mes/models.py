@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
+#           维修
 class Repair(models.Model):
     item_no = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
     product_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='品名')
@@ -26,7 +26,7 @@ class Repair(models.Model):
         db_table = 'repair'
 
 
-
+#           质检
 class IQC(models.Model):
     material_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='物料名称')
     material_sn = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
@@ -44,7 +44,7 @@ class IQC(models.Model):
 
 
 
-
+#            测试
 class test(models.Model):
     test1 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据1')
     test2 = models.CharField(max_length=255, blank=True, null=True,verbose_name='测试数据2')
@@ -58,6 +58,9 @@ class test(models.Model):
 
 
 
+
+#             库房
+#库存
 class ware_house(models.Model):
     item_no = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
     item_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='名称')
@@ -71,3 +74,29 @@ class ware_house(models.Model):
         managed = True
         db_table = 'ware_house'
 
+#出货记录
+class out_record(models.Model):
+    item_no = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
+    item_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='名称')
+    numbers = models.CharField(max_length=255,blank=True,null=True,verbose_name='数量')
+    customer = models.CharField(max_length=255, blank=True, null=True,verbose_name='客户')
+    out_address = models.CharField(max_length=255, blank=True, null=True,verbose_name='出货地址')
+    out_time = models.DateTimeField(blank=True, null=True,verbose_name='出货时间')
+
+
+    class Meta:
+        managed = True
+        db_table = 'out_record'
+#入库记录
+class in_record(models.Model):
+    item_no = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
+    item_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='名称')
+    numbers = models.CharField(max_length=255,blank=True,null=True,verbose_name='数量')
+    supplier = models.CharField(max_length=255, blank=True, null=True,verbose_name='供应商')
+    in_time = models.DateTimeField(blank=True, null=True,verbose_name='入库时间')
+
+
+    class Meta:
+        managed = True
+        db_table = 'in_record'
+#盘点
