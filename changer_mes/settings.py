@@ -137,13 +137,13 @@ STATICFILES_DIRS = [
 admin.AdminSite.site_header="NEXRAY生产管理系统"
 admin.AdminSite.site_title="NEXRAY"
 
-
-
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_HOME_QUICK = False
 import time
 import mes
 SIMPLEUI_CONFIG = {
     'system_keep': False,
-    'menu_display': ['IQC', '维修', '用户管理',],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'menu_display': ['业务订单','生产','IQC', '维修','库房', '用户管理','综合页面'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'dynamic': False,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [
 
@@ -156,46 +156,164 @@ SIMPLEUI_CONFIG = {
         #         'icon': 'far fa-surprise'
         #     },
 
-
+#维修
         {
             'name': '维修',
-            'icon': 'fas fa-code',
+            'icon': 'fas fa-tools',
             'models': [{
                 'name': '维修记录',
                 'url': 'mes/repair/',
-                'icon': 'far fa-surprise'
+                'icon': 'fas fa-tools'
             },
+                {
+                    'name': '维修治具记录',
+                    'url': 'mes/repair/',
+                    'icon': 'fas fa-tools'
+                },
+                {
+                    'name': '维修报废记录',
+                    'url': 'mes/repair/',
+                    'icon': 'fas fa-tools'
+                },
 
             ]
         },
-
+#质检
         {
             'name': 'IQC',
-            'icon': 'fas fa-code',
+            'icon': 'far fa-check-circle',
             'models': [{
                 'name': '来料质检',
                 'url': 'mes/iqc/',
-                'icon': 'far fa-surprise'
+                'icon': 'far fa-check-circle'
             },
+                {
+                    'name': '生产质检',
+                    'url': 'mes/iqc/',
+                    'icon': 'far fa-check-circle'
+                },
+                {
+                    'name': '出货质检',
+                    'url': 'mes/iqc/',
+                    'icon': 'far fa-check-circle'
+                },
+                {
+                    'name': '报表分析',
+                    'url': 'mes/iqc/',
+                    'icon': 'far fa-check-circle'
+                },
 
             ]
         },
-
+#用户管理
                 {
                     'name': '用户管理',
-                    'icon': 'fas fa-code',
+                    'icon': 'fas fa-users',
                     'models': [
 
                         {
                             'name': '用户',
                             'url': '/admin/auth/user/',
-                            'icon': 'far fa-surprise'
+                            'icon': 'fas fa-users'
                         },
                     ]
                 },
+#生产
+        {
+            'name': '生产',
+            'icon': 'fas fa-gavel',
+            'models': [{
+                'name': '组装',
+                'url': 'http://127.0.0.1:8000/add1',
+                'icon': 'fas fa-gavel'
+            },
+                {
+                    'name': '基测',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+                {
+                    'name': '烧机',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+                {
+                    'name': '功测',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+                {
+                    'name': '包装',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+                {
+                    'name': '报表分析',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+
+            ]
+        },
+#业务订单
+        {
+            'name': '业务订单',
+            'icon': 'fas fa-american-sign-language-interpreting',
+            'models': [{
+                'name': '生产询期',
+                'url': 'mes/repair/',
+                'icon': 'fas fa-american-sign-language-interpreting'
+            },
+                {
+                    'name': '生产询料',
+                    'url': 'mes/repair/',
+                    'icon': 'fas fa-american-sign-language-interpreting'
+                },
+                {
+                    'name': '录入订单/通知各部',
+                    'url': 'mes/repair/',
+                    'icon': 'fas fa-american-sign-language-interpreting'
+                },
+
+            ]
+        },
+
+#库房
+
+        {
+            'name': '库房',
+            'icon': 'fas fa-warehouse',
+            'models': [{
+                'name': '盘点',
+                'url': 'http://127.0.0.1:8000/add1',
+                'icon': 'fas fa-warehouse'
+            },
+                {
+                    'name': '入库记录',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-warehouse'
+                },
+                {
+                    'name': '出库记录',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-warehouse'
+                },
+                {
+                    'name': '库存',
+                    'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-warehouse'
+                },
 
 
+            ]
+        },
 
+
+        {
+            'name': '综合页面',
+            'url': 'https://www.baidu.com',
+            'icon': 'fas fa-users'
+        },
 
 
             ]

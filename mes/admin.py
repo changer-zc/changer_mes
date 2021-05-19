@@ -12,7 +12,7 @@ from mes import views
 
 class Repair_Admin(admin.ModelAdmin):
     #显示的字段
-    list_display = ('item_no','product_name','sn','board_sn','statu','be_overdue','receive_time','repair_time')
+    list_display = ('item_no','product_name','sn','board_sn','statu','be_overdue','receive_time','repair_time','out_time')
     #每页展示的条数
     list_per_page = 30
     #点击保存并继续编辑这个按钮给取消掉
@@ -22,7 +22,7 @@ class Repair_Admin(admin.ModelAdmin):
     #列表页搜索字段
     search_fields = ('item_no','sn','board_sn','repair_time',)
     #在列表页可以编辑的字段
-    list_editable = ('statu','repair_time')
+    list_editable = ('statu','repair_time','out_time')
 
     #列表页上时间搜索
     date_hierarchy = 'repair_time'
