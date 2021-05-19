@@ -55,3 +55,19 @@ class test(models.Model):
     class Meta:
         managed = True
         db_table = 'test'
+
+
+
+class ware_house(models.Model):
+    item_no = models.CharField(max_length=255, blank=True, null=True,verbose_name='料号')
+    item_name = models.CharField(max_length=255, blank=True, null=True,verbose_name='名称')
+    numbers = models.CharField(max_length=255,blank=True,null=True,verbose_name='数量')
+    location = models.CharField(max_length=255, null=True,verbose_name='库位',choices=(('成品仓','成品仓'),('半成品仓','半成品仓'),('电子库房','电子库房')),default='成品仓')
+    supplier = models.CharField(max_length=255, blank=True, null=True,verbose_name='厂商')
+    inventory_time = models.DateTimeField(blank=True, null=True,verbose_name='盘点时间')
+
+
+    class Meta:
+        managed = True
+        db_table = 'ware_house'
+
