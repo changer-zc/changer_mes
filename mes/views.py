@@ -7,30 +7,30 @@ import pymysql
 #引入项目的settings文件
 from django.conf import settings
 # Create your views here.
-def add1(request):
-    if request.method == 'GET':
-        return render(request,'add1.html')
-    else:
-        test1 = request.POST.get('record_no')
-        test2 = request.POST.get('sn')
-        test3 = request.POST.get('board_sn')
-        test4 = request.POST.get('mac1')
-        test5 = request.POST.get('mac2')
-        if models.test.objects.filter(test2=test2):
-            print("已有该数据，不要重复添加")
-            test = models.test.objects.values()[:10]
-            test = list(test)
-            print(test)
-            error_str = "已有该数据，不要重复添加"
-            return render(request,'add1.html',{"test":test,"error_str":error_str})
-        else:
-            test_save = models.test(test1=test1,test2=test2,test3=test3,test4=test4,test5=test5)
-            test_save.save()
-            print("11111")
-            test = models.test.objects.values()[:10]
-            test = list(test)
-            print(test)
-            return render(request,'add1.html',{"test":test})
+# def add1(request):
+#     if request.method == 'GET':
+#         return render(request,'add1.html')
+#     else:
+#         test1 = request.POST.get('record_no')
+#         test2 = request.POST.get('sn')
+#         test3 = request.POST.get('board_sn')
+#         test4 = request.POST.get('mac1')
+#         test5 = request.POST.get('mac2')
+#         if models.test.objects.filter(test2=test2):
+#             print("已有该数据，不要重复添加")
+#             test = models.test.objects.values()[:10]
+#             test = list(test)
+#             print(test)
+#             error_str = "已有该数据，不要重复添加"
+#             return render(request,'add1.html',{"test":test,"error_str":error_str})
+#         else:
+#             test_save = models.test(test1=test1,test2=test2,test3=test3,test4=test4,test5=test5)
+#             test_save.save()
+#             print("11111")
+#             test = models.test.objects.values()[:10]
+#             test = list(test)
+#             print(test)
+#             return render(request,'add1.html',{"test":test})
 
 
 
@@ -97,12 +97,17 @@ def get_student():
 
 
 
-#--------------------------------------分割线
-#-----------------这个是/test02页面引用函数
+
+
+#--------------------------------------分割线-----------------------------------
+#-----------------这个是/test02页面主引用函数------------------------------------------
+
 def test(request1):#这个是做异常处理，调用下面这个函数，然后判断正常就返回，注意函数的参数，纠结了很久，然后再在urls。py里面去更改url路径和对应使用哪个函数，这个是最简单的连接sqlserver的,其他的我觉得太复杂，不学了，学一样连接方式就行了
     # try:
-
+    #查询当日工单的信息，展示页面上面的表
     results = today_info()
+
+    #查询当月生产信息，展示页面下面的表
     count_list = production()
     # real_count = real_count_list()
     return render(request1,'test02.html',{'sql_server_results':results,'count_list':count_list,})
@@ -119,26 +124,7 @@ def test(request1):#这个是做异常处理，调用下面这个函数，然后
 
 
 
-
-
-#-------------------------以下是sqlserver数据库连接的函数----------------------------------
-def sql_server_get():#这个是连接数据库查询，然后然后结果，是一个查询函数
-    import pymssql
-    import re
-    sql_server_conn = pymssql.connect(host='10.130.1.253', user='barcode', password='barcodefornexcom',
-                                      database='MIS')
-    sql_server_cursor = sql_server_conn.cursor()
-    sql_server_cursor.execute('select iom01 from invoice_master; ')
-    sql_server_resluts = sql_server_cursor.fetchall()  # 取出来的单个数据是元组，要进行格式化成字符串，然后去掉所有符号
-    r = '[’!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~\n。！，]+'  # 这个是多有需要替换的符号
-    results1 = re.sub(r, '', str(sql_server_resluts[0]))  # 格式化成字符串后再把所有符号替换成''
-    results2 = re.sub(r, '', str(sql_server_resluts[1]))
-    results3 = re.sub(r, '', str(sql_server_resluts[2]))
-    results4 = re.sub(r, '', str(sql_server_resluts[3]))
-    sql_server_all = [results1, results2, results3, results4]
-    return sql_server_all
-
-
+#--------------------------------test02的子函数--------------------------------------------------------
 def today_info():#查询当日在做的工单号，并且相关数据192.168.220.128
 
     import pymssql
@@ -152,6 +138,8 @@ def today_info():#查询当日在做的工单号，并且相关数据192.168.220
     aaa = sql_server_cursor.fetchone()
     # 保存用做查询的工单号
     form_no = aaa[1].strip()
+
+
     # 设置各工站的变量
     operate1 = "Q0015"
     operate2 = "Q0013"
@@ -159,7 +147,9 @@ def today_info():#查询当日在做的工单号，并且相关数据192.168.220
     operate4 = "Q0022"
     operate5 = "Q0020"
     # 完整的工单号码
+    record_number = aaa[1].strip()
     today_info = (aaa[0].strip() + '-' + aaa[1].strip())
+
 
     # 进行第一个工站的生产量查询
     sql_server_cursor1 = sql_server_conn.cursor()
@@ -197,6 +187,24 @@ def today_info():#查询当日在做的工单号，并且相关数据192.168.220
     fff = str(list(sql_server_cursor5.fetchone())[0])
     print("包装站：" + fff)
 
+
+
+    #查询该工单使用的料号
+    sql_server_cursor6 = sql_server_conn.cursor()
+    sql_server_cursor6.execute("select item_no from assyset where ta_no='%s'  " % (today_info,))
+    ggg = str(list(sql_server_cursor6.fetchone())[0])
+    print("工单料号：" + ggg)
+
+    #查询该工单是哪个机种，该机种是哪个版本号
+    # sql_server_cursor6 = sql_server_conn.cursor()
+    # sql_server_cursor6.execute("USE NEXCOM; select TA034 from MOCTA where TA002='%s'" % (record_number))
+    # ggg = str(list(sql_server_cursor6.fetchone())[0])
+    # print("ggg:"+ggg)
+    # hhh = (models.version_manager.objects.filter(item_name=ggg).values())[0].get('version')
+    # print(hhh)
+
+
+
     all_info = [today_info, bbb, ccc, ddd, eee, fff]
     sql_server_conn.close()
 
@@ -221,6 +229,9 @@ def today_info():#查询当日在做的工单号，并且相关数据192.168.220
     all_info.append(today_info_allcount)
     all_info.append(completion_rate)
     all_info.append(today_info_weiwancheng)
+    all_info.append(ggg)
+    # all_info.append(hhh)
+    print(all_info)
     return all_info
 
 
@@ -269,8 +280,8 @@ def production():
     count_list = []#定义一个空列表
     i = 0
     real_count = real_count_list()
-    print(real_count)
-    print(real_count[0])
+    # print(real_count)
+    # print(real_count[0])
     while i < list_item_count:#当i小于当月生产工单数量时执行
         sql_server_conn_production_count = sql_server_conn.cursor()
         sql = "use NEXCOM;select TA002,TA006,TA015,TA034 from MOCTA where TA002='%s'" % (new_list[i])#依次执行查询工单预计生产量
@@ -279,10 +290,10 @@ def production():
         a = sql_server_conn_production_count.fetchall()#查询出的结果是一个列表里面包含元组
         # a = a[0] + real_count[i]
         b = a[0] + real_count[i]#元组可以这样添加元素
-        print(b)
+        # print(b)
         count_list.append(b)#把查询出一个工单的元组数据添加到列表中
         i = i + 1#增加1继续循环，直到当月生产工单列表中的总个数
-    print(count_list)
+    # print(count_list)
     return count_list
     # return render(request2,"test02.html",{"count_list":count_list})
 

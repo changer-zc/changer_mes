@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body style="background-color: #eeeeee">
+
+
+{#<form action="../add1/" method="post">#}
+{#    {% csrf_token %}#}
+{#    <h2>组装扫码</h2>#}
+{#    工单号：<input name="record_no" value="">#}
+{#    SN:   <input name="sn" value="">#}
+{#    主板号：<input name="board_sn" value="">#}
+{#    MAC:  <input name="mac1" value="">#}
+{#          <input name="mac2" value="">#}
+{#    <input type="submit" value="提交">#}
+{#</form>#}
+
+{#中间加一行隔开#}
+<div class=layui-row style="height: 80px"><h1>组装扫码</h1></div>
+
+
+{#form表单主行#}
+<div class=layui-row style="height: 400px;">
+    {#    中间的列#}
+    <div class="layui-col-md5"  >
+        {#        表单#}
+        <form class="layui-form" action="../add2_jice/" method="post">
+            {% csrf_token %}
+            <br><br><br>
+            {#    表单主体#}
+            <div class="layui-form-item">
+                <label class="layui-form-label"><h2>工单号</h2></label>
+                <div class="layui-input-block">
+                    <input type="text"  style="width: 300px" name="record_no" value="" required  lay-verify="required"  autocomplete="off" class="layui-input" placeholder="请输入工单号">
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><h2>sn</h2></label>
+                <div class="layui-input-block">
+                    <input type="text" name="sn" value="" required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 300px" placeholder="请输入SN">
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><h2>主板号</h2></label>
+                <div class="layui-input-block">
+                    <input type="text" name="board_sn" value="" required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 300px" placeholder="请输入主板号">
+                </div>
+            </div>
+            <br>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label"><h2>MAC</h2></label>
+
+                <div class="layui-input-block">
+                    <input type="text" name="mac1" value="" required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 300px" placeholder="请输入MAC1">
+                </div>
+                <br>
+                <div class="layui-input-block">
+                    <input type="text" name="mac2" value="" required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 300px" placeholder="请输入MAC2">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+
+                <div class="layui-input-block">
+                    <input type="submit" value="提交" class="layui-btn layui-btn-normal">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="layui-col-md6" style="background-color: #9ca1b9">
+        <h2>{{ error_str }}</h2>
+
+
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>工单</th>
+                <th>SN</th>
+                <th>主板</th>
+                <th>MAC1</th>
+                <th>MAC2</th>
+            </tr>
+            </thead>
+
+            {% for foo in test %}
+                <tr>
+                    <td>{{ foo.id }}</td>
+                    <td>{{ foo.test1 }}</td>
+                    <td>{{ foo.test2 }}</td>
+                    <td>{{ foo.test3 }}</td>
+                    <td>{{ foo.test4 }}</td>
+                    <td>{{ foo.test5 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+<script src="/static/layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+</html>

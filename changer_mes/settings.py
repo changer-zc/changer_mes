@@ -15,6 +15,7 @@ import pymysql
 from pathlib import Path
 from django.contrib import admin
 import simpleui
+import django.core.exceptions
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -36,13 +37,18 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'simpleui',
     'mes',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,7 +149,7 @@ import time
 import mes
 SIMPLEUI_CONFIG = {
     'system_keep': False,
-    'menu_display': ['业务订单','生产','IQC', '维修','库房', '用户管理','综合页面'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'menu_display': ['业务订单','生产','IQC', '维修','库房', '用户管理','综合页面','测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'dynamic': False,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [
 
@@ -167,12 +173,12 @@ SIMPLEUI_CONFIG = {
             },
                 {
                     'name': '维修治具记录',
-                    'url': 'mes/repair/',
+                    'url': 'mes/tools_record/',
                     'icon': 'fas fa-tools'
                 },
                 {
                     'name': '维修报废记录',
-                    'url': 'mes/repair/',
+                    'url': 'mes/repair_scrap/',
                     'icon': 'fas fa-tools'
                 },
 
@@ -188,13 +194,13 @@ SIMPLEUI_CONFIG = {
                 'icon': 'far fa-check-circle'
             },
                 {
-                    'name': '生产质检',
-                    'url': 'mes/iqc/',
+                    'name': '生产不良记录',
+                    'url': 'mes/production_iqc/',
                     'icon': 'far fa-check-circle'
                 },
                 {
                     'name': '出货质检',
-                    'url': 'mes/iqc/',
+                    'url': 'mes/out_iqc/',
                     'icon': 'far fa-check-circle'
                 },
                 {
@@ -224,7 +230,7 @@ SIMPLEUI_CONFIG = {
             'icon': 'fas fa-gavel',
             'models': [{
                 'name': '组装',
-                'url': 'http://127.0.0.1:8000/add1',
+                'url': 'http://10.130.1.16:8000/add1/',
                 'icon': 'fas fa-gavel'
             },
                 {
@@ -245,6 +251,11 @@ SIMPLEUI_CONFIG = {
                 {
                     'name': '包装',
                     'url': 'http://127.0.0.1:8000/add1',
+                    'icon': 'fas fa-gavel'
+                },
+                {
+                    'name': '版本维护',
+                    'url': 'mes/version_manager/',
                     'icon': 'fas fa-gavel'
                 },
                 {
@@ -290,12 +301,12 @@ SIMPLEUI_CONFIG = {
             },
                 {
                     'name': '入库记录',
-                    'url': 'http://127.0.0.1:8000/add1',
+                    'url': 'mes/in_record',
                     'icon': 'fas fa-warehouse'
                 },
                 {
                     'name': '出库记录',
-                    'url': 'http://127.0.0.1:8000/add1',
+                    'url': 'mes/out_record',
                     'icon': 'fas fa-warehouse'
                 },
                 {
@@ -311,9 +322,25 @@ SIMPLEUI_CONFIG = {
 
         {
             'name': '综合页面',
-            'url': 'https://www.baidu.com',
+            'url': '/test02/',
             'icon': 'fas fa-users'
         },
+
+
+
+        #测试
+        {
+            'name': '测试',
+            'icon': 'fas fa-warehouse',
+            'models': [{
+                'name': '测试',
+                'url': 'mes/test',
+                'icon': 'fas fa-warehouse'
+            },]
+
+        }
+
+
 
 
             ]

@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mes import views
+from mes import views_auto_sop
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('add1/',views.add1),
-    path('test02/',views.test)
+    path('test02/',views.test),
+    path('auto_sop/',views_auto_sop.test2)
 ]
