@@ -20,5 +20,6 @@ from mes import views_auto_sop
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test02/',views.test),
-    path('auto_sop/',views_auto_sop.test2)
+    path('auto_sop/',views_auto_sop.test2),
+    path('auto_sop_table/',views_auto_sop.test3)
 ]

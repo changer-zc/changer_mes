@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta http-equiv="refresh" content="1800"  >
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>自查对照页面</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../static/css/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    {#    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/2.0.0/css/frozen.css">#}
+    <!-- fonts style -->
+    {#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700&display=swap" rel="stylesheet" />#}
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../static/css/responsive.css" rel="stylesheet" />
+    <script src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
+</head>
+
+<body style="background-color: #fefefe">
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+
+
+{#------------------------本页面使用LAYUI---------------------#}
+
+<div class="layui-row layui-col-space5" style="width: 1890px;margin-top: 20px">
+    <div class="layui-col-md5">
+        <div class="grid-demo grid-demo-bg1"></div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo"><h2 style="color: #ffffff">科立锐兴战情看板</h2></div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo grid-demo-bg1"><a style="color: #fefefe;left: 400px" href="http://10.130.1.252/changer-1117.asp?sn=CQSCA0400244"><button class="ui-btn ui-btn-primary">查询</button></a></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="layui-row" style="height: 80px"></div>
+{#       ---------------表格-------------------#}
+{#总行#}
+<div class="layui-row" style="background-color: #fdfcfc; width: 1890px;height: 200px">
+    {#       第一列#}
+    <div class="layui-col-md6" style="background-color: #fefefe">
+        <div class="grid-demo grid-demo-bg1">
+
+
+            <div class="layui-form">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>今日工单</th>
+                        <th>组装站</th>
+                        <th>基测站</th>
+                        <th>烧机站</th>
+                        <th>功测站</th>
+                        <th>包装站</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ input_web.0 }}&nbsp;</td>
+                        <td>{{ input_web.1 }}&nbsp;&nbsp;</td>
+                        <td>{{ input_web.2 }}&nbsp;&nbsp;</td>
+                        <td>{{ input_web.3 }}&nbsp;</td>
+                        <td>{{ input_web.4 }}&nbsp;&nbsp;</td>
+                        <td>{{ input_web.5 }}&nbsp;&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><h6> 计划完成量：{{ input_web.6 }}台</h6></td>
+                        <td><h6> 良率：100% </h6></td>
+                        <td><h6>完成率：{{ input_web.7 }}  </h6></td>
+                        <td><h6> 版本号： </h6></td>
+                        <td><h6> 料号：{{ input_web.9 }} </h6></td>
+                        <td><h6> -- </h6></td>
+                    </tr>
+                    <tr>
+                        <td><h6>--</h6></td>
+                        <td><h6>  --</h6></td>
+                        <td><h6>-- </h6></td>
+                        <td><h6> -- </h6></td>
+                        <td><h6> -- </h6></td>
+                        <td><h6> -- </h6></td>
+                    </tr>
+                    <tr>
+                        <td><h6>--</h6></td>
+                        <td><h6>  --</h6></td>
+                        <td><h6>-- </h6></td>
+                        <td><h6> -- </h6></td>
+                        <td><h6> -- </h6></td>
+                        <td><h6> -- </h6></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    {#       ---------------图表-------------------#}
+    <div class="layui-col-md2" >
+        <p>实物图</p>
+        <img src="../static/pic/{{ execute_open.2 }}" height="300" width="200">
+
+    </div>
+    {#       ---------------图表-------------------#}
+    {#       ---------------图表-------------------#}
+    <div class="layui-col-md2">
+        <p>标签图</p>
+        <img src="../static/lable/{{ execute_open.2 }}" height="300" width="200">
+    </div>
+    {#       ---------------图表-------------------#}
+</div>
+
+</body>
+</html>
